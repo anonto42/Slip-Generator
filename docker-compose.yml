@@ -1,0 +1,36 @@
+
+services:
+  backend:
+    build: .
+    container_name: chalan-invoice-backend
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-3000}:${APP_PORT}"
+    depends_on:
+      - postgres_db
+    env_file:
+      - .env
+    networks:
+      - app-net
+
+  postgres_db:
+    image: postgres:16
+    container_name: chalan-invoice-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME:-appdb}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge
+
+volumes:
+  db_data:

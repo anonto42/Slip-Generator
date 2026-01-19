@@ -13,7 +13,7 @@ export class UsersService {
 
   async create(userData: Partial<User>): Promise<User> {
     const hashedPassword = await bcrypt.hash(userData.password as string, 10);
-    
+
     const user = this.usersRepository.create({
       ...userData,
       password: hashedPassword,
@@ -36,13 +36,22 @@ export class UsersService {
 
   async findAll(): Promise<User[]> {
     return this.usersRepository.find({
-      select: ['id', 'name', 'email', 'phone', 'role', 'isActive', 'branchId', 'createdAt'],
+      select: [
+        'id',
+        'name',
+        'email',
+        'phone',
+        'role',
+        'isActive',
+        'branchId',
+        'createdAt',
+      ],
     });
   }
 
   async update(id: string, updateData: Partial<User>): Promise<User> {
     await this.findOne(id);
-    
+
     if (updateData.password) {
       updateData.password = await bcrypt.hash(updateData.password, 10);
     }

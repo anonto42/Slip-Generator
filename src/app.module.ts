@@ -5,6 +5,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { CctvModule } from './modules/cctv/cctv.module';
 import { AcModule } from './modules/ac/ac.module';
+import { ServiceDetailsModule } from './modules/service-details/service-details.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { AcModule } from './modules/ac/ac.module';
     UsersModule,
     CctvModule,
     AcModule,
-  ],
+    ServiceDetailsModule,
+  ]
 })
 export class AppModule {}

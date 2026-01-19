@@ -2,10 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
-import { UsersModule } from './modules/users/users.module';
-import { CctvModule } from './modules/cctv/cctv.module';
-import { AcModule } from './modules/ac/ac.module';
-import { ServiceDetailsModule } from './modules/service-details/service-details.module';
 
 @Module({
   imports: [
@@ -28,11 +24,7 @@ import { ServiceDetailsModule } from './modules/service-details/service-details.
       }),
       inject: [ConfigService],
     }),
-    AuthModule,
-    UsersModule,
-    CctvModule,
-    AcModule,
-    ServiceDetailsModule,
+    AuthModule
   ]
 })
 export class AppModule {}
